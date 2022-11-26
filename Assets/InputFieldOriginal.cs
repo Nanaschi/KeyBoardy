@@ -1288,7 +1288,7 @@ public class InputFieldOriginal
             caretSelectPositionInternal = caretPositionInternal = position;
     }
 
-    private void Delete()
+    protected void Delete()
     {
         if (caretPositionInternal == caretSelectPositionInternal)
             return;
@@ -1322,7 +1322,7 @@ public class InputFieldOriginal
         }
     }
 
-    private void Backspace()
+    protected void Backspace()
     {
         if (hasSelection)
         {

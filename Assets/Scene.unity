@@ -1940,6 +1940,9 @@ MonoBehaviour:
     valueToType: b
   - buttonUI: {fileID: 1309959184}
     valueToType: c
+  backSpace: {fileID: 296570969}
+  left: {fileID: 1292237328}
+  right: {fileID: 1550262414}
 --- !u!114 &1709371265
 MonoBehaviour:
   m_ObjectHideFlags: 0
