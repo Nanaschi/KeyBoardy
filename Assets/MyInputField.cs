@@ -34,7 +34,10 @@ public class MyInputField : InputFieldOriginal
         text += letterClicked;
         m_AllowInput = true;
         caretPosition = text.Length;
+        Select();
         ActivateInputField();
+
+
         UpdateLabel();
 
     }
