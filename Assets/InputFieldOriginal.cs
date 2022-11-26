@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
@@ -181,7 +182,7 @@ public class InputFieldOriginal
     private CanvasRenderer m_CachedInputRenderer;
     private bool m_PreventFontCallback = false;
     [NonSerialized] protected Mesh m_Mesh;
-    private bool m_AllowInput = false;
+    protected bool m_AllowInput = false;
     private bool m_ShouldActivateNextUpdate = false;
     private bool m_UpdateDrag = false;
     private bool m_DragPositionOutOfBounds = false;
@@ -195,7 +196,7 @@ public class InputFieldOriginal
     private Coroutine m_DragCoroutine = null;
     private string m_OriginalText = "";
     private bool m_WasCanceled = false;
-    private bool m_HasDoneFocusTransition = false;
+    protected bool m_HasDoneFocusTransition = false;
 
     // Doesn't include dot and @ on purpose! See usage for details.
     const string kEmailSpecialCharacters = "!#$%&'*+-/=?^_`{|}~";
@@ -211,6 +212,7 @@ public class InputFieldOriginal
                 m_Mesh = new Mesh();
             return m_Mesh;
         }
+        set => throw new NotImplementedException();
     }
 
     protected TextGenerator cachedInputTextGenerator
@@ -222,6 +224,7 @@ public class InputFieldOriginal
 
             return m_InputTextCache;
         }
+        set => throw new NotImplementedException();
     }
 
     /// <summary>
@@ -294,6 +297,7 @@ public class InputFieldOriginal
     public bool isFocused
     {
         get { return m_AllowInput; }
+        set => m_AllowInput = value;
     }
 
     public float caretBlinkRate
@@ -336,10 +340,19 @@ public class InputFieldOriginal
     public CharacterValidation characterValidation { get { return m_CharacterValidation; } set { if (SetPropertyUtility.SetStruct(ref m_CharacterValidation, value)) SetToCustom(); } }
 
     // Derived property
-    public bool multiLine { get { return m_LineType == LineType.MultiLineNewline || lineType == LineType.MultiLineSubmit; } }
+    public bool multiLine
+    {
+        get { return m_LineType == LineType.MultiLineNewline || lineType == LineType.MultiLineSubmit; }
+        set => throw new NotImplementedException();
+    }
+
     // Not shown in Inspector.
     public char asteriskChar { get { return m_AsteriskChar; } set { SetPropertyUtility.SetStruct(ref m_AsteriskChar, value); } }
-    public bool wasCanceled { get { return m_WasCanceled; } }
+    public bool wasCanceled
+    {
+        get { return m_WasCanceled; }
+        set => m_WasCanceled = value;
+    }
 
     protected void ClampPos(ref int pos)
     {
@@ -354,7 +367,7 @@ public class InputFieldOriginal
 
     protected int caretPositionInternal { get { return m_CaretPosition + Input.compositionString.Length; } set { m_CaretPosition = value; ClampPos(ref m_CaretPosition); } }
     protected int caretSelectPositionInternal { get { return m_CaretSelectPosition + Input.compositionString.Length; } set { m_CaretSelectPosition = value; ClampPos(ref m_CaretSelectPosition); } }
-    private bool hasSelection { get { return caretPositionInternal != caretSelectPositionInternal; } }
+    protected bool hasSelection => caretPositionInternal != caretSelectPositionInternal;
 
 #if UNITY_EDITOR
     [Obsolete("caretSelectPosition has been deprecated. Use selectionFocusPosition instead (UnityUpgradable) -> selectionFocusPosition", true)]
@@ -502,7 +515,7 @@ public class InputFieldOriginal
 
     // SetCaretActive will not set the caret immediately visible - it will wait for the next time to blink.
     // However, it will handle things correctly if the blink speed changed from zero to non-zero or non-zero to zero.
-    void SetCaretActive()
+    protected void SetCaretActive()
     {
         if (!m_AllowInput)
             return;
@@ -1989,7 +2002,7 @@ public class InputFieldOriginal
         m_ShouldActivateNextUpdate = true;
     }
 
-    private void ActivateInputFieldInternal()
+    protected void ActivateInputFieldInternal()
     {
         if (EventSystem.current.currentSelectedGameObject != gameObject)
             EventSystem.current.SetSelectedGameObject(gameObject);
@@ -2034,6 +2047,7 @@ public class InputFieldOriginal
 
     public void DeactivateInputField()
     {
+        Debug.Log($"{MethodBase.GetCurrentMethod()} {Time.time}", this);
         // Not activated do nothing.
         if (!m_AllowInput)
             return;
