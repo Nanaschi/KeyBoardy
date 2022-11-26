@@ -2047,7 +2047,6 @@ public class InputFieldOriginal
 
     public void DeactivateInputField()
     {
-        Debug.Log($"{MethodBase.GetCurrentMethod()} {Time.time}", this);
         // Not activated do nothing.
         if (!m_AllowInput)
             return;

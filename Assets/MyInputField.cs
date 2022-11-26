@@ -13,6 +13,17 @@ public class MyInputField : InputFieldOriginal
 
     private int currentCarretPosition;
 
+    public override void OnDeselect(BaseEventData eventData)
+    {
+        OnSelect(eventData);
+
+    }
+
+    protected override void Start()
+    {
+        ActivateInputField();
+    }
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -28,7 +39,6 @@ public class MyInputField : InputFieldOriginal
 
     private void RightClicked()
     {
-        
     }
 
     private void LeftClicked()
@@ -41,17 +51,20 @@ public class MyInputField : InputFieldOriginal
         ActivateInputField();
 
         UpdateLabel();
-        
+
         /*SelectInputField();*/
     }
 
     private void BackSpaceClicked()
     {
-        if(string.IsNullOrEmpty(text)) return;
+        if (string.IsNullOrEmpty(text)) return;
         StringBuilder sb = new StringBuilder(text);
-        sb.Remove(text.Length - 1, 1);
+        sb.Remove(currentCarretPosition, 1);
         text = sb.ToString();
-        SelectInputField();
+        m_AllowInput = true;
+        Select();
+        ActivateInputField();
+        UpdateLabel();
     }
 
     protected override void OnDisable()
@@ -61,13 +74,15 @@ public class MyInputField : InputFieldOriginal
         {
             uiButton.ButtonUI.onClick.RemoveAllListeners();
         }
+
         backSpace.onClick.RemoveAllListeners();
     }
 
     private void ClickLetter(string letterClicked)
     {
         text += letterClicked;
-        SelectInputField();
+        m_CaretPosition = m_CaretSelectPosition = text.Length;
+        UpdateLabel();
     }
 
     private void SelectInputField()
