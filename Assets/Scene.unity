@@ -286,19 +286,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 67808555}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1709371264}
-        m_TargetAssemblyTypeName: MyInputField, Assembly-CSharp
-        m_MethodName: ClickLetter
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: a
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &67808555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,19 +782,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 549934396}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1562917989}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: KeyPress
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: B
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &549934396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,19 +1100,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1309959185}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1562917989}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: KeyPress
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: C
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1309959185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1969,7 +1933,13 @@ MonoBehaviour:
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
   m_Text: 
   m_CaretBlinkRate: 0.85
-  myText: {fileID: 55935717}
+  uiButtons:
+  - buttonUI: {fileID: 67808554}
+    valueToType: a
+  - buttonUI: {fileID: 549934395}
+    valueToType: b
+  - buttonUI: {fileID: 1309959184}
+    valueToType: c
 --- !u!114 &1709371265
 MonoBehaviour:
   m_ObjectHideFlags: 0
