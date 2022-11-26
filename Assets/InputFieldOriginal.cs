@@ -1154,7 +1154,7 @@ public class InputFieldOriginal
         return spaceLoc;
     }
 
-    private void MoveLeft(bool shift, bool ctrl)
+    protected void MoveLeft(bool shift, bool ctrl)
     {
         if (hasSelection && !shift)
         {

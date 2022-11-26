@@ -11,6 +11,7 @@ public class MyInputField : InputFieldOriginal
     [SerializeField] private List<UIButton> uiButtons = new();
     [SerializeField] private Button backSpace, left, right;
 
+    private int currentCarretPosition;
 
     protected override void OnEnable()
     {
@@ -21,6 +22,27 @@ public class MyInputField : InputFieldOriginal
         }
 
         backSpace.onClick.AddListener(BackSpaceClicked);
+        left.onClick.AddListener(LeftClicked);
+        right.onClick.AddListener(RightClicked);
+    }
+
+    private void RightClicked()
+    {
+        
+    }
+
+    private void LeftClicked()
+    {
+        caretSelectPositionInternal += currentCarretPosition - 1;
+        caretPositionInternal += currentCarretPosition - 1;
+        currentCarretPosition = caretSelectPositionInternal = caretPositionInternal;
+        m_AllowInput = true;
+        Select();
+        ActivateInputField();
+
+        UpdateLabel();
+        
+        /*SelectInputField();*/
     }
 
     private void BackSpaceClicked()
@@ -39,6 +61,7 @@ public class MyInputField : InputFieldOriginal
         {
             uiButton.ButtonUI.onClick.RemoveAllListeners();
         }
+        backSpace.onClick.RemoveAllListeners();
     }
 
     private void ClickLetter(string letterClicked)
@@ -54,5 +77,7 @@ public class MyInputField : InputFieldOriginal
         Select();
         ActivateInputField();
         UpdateLabel();
+        currentCarretPosition = caretSelectPositionInternal = caretPositionInternal;
+        print(currentCarretPosition);
     }
 }
